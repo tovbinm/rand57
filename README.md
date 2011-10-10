@@ -9,7 +9,7 @@ Given a function which produces a random integer in the range [1,5], write a fun
 I've implemented three solutions, while rand7_4 gives the best results requiring 2 x rand5 executions per call with probability of 21/25.
 
 ### Results
-Below are the results from my i5-2.8/8Gb using scala 2.9.1:
+Below are the results from my i5-2.8/8Gb using scala 2.9.1 for 10,000,000 iterations:
 
 * Function:----Time-:-------------Values Distribution----------------- 
 * rand5---:-443ms--:-2001116,1998263,2000685,1999141,2000795
