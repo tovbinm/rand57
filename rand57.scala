@@ -10,23 +10,30 @@ def rand5 = scala.util.Random.nextInt(5) + 1
 
 //-------------------Solution-------------------
 
-// Initial implementation: 7 x rand5
+// 1 - Initial implementation: 7 x rand5
 def rand7_1 = {
   var r = 0
   for(x <- 0 to 7) r = r + rand5 
   r%7 + 1
 }
-// Improved version: ~3 x rand5
+// 2 - Improved version: ~3 x rand5
 def rand7_2 = {
   var vv = rand8
   while(vv==8) vv = rand8
   vv
 }  
-// Improved version: ~2 x rand5
+// 3 - Improved version: ~2 x rand5
 def rand7_3 = {
   var vv = rand16
   while(vv>14) vv = rand16
   vv%7 + 1
+}    
+
+// 4 - Improved version: Pr(2 x rand5) = 21/25
+def rand7_4 = {
+  var r = 5*(rand5-1) + (rand5-1)  
+  while(r > 20) r = 5*(rand5-1) + (rand5-1)  
+  (r%7)+1
 }    
 
 //-------------------Helpers-------------------
@@ -57,7 +64,7 @@ import compat.Platform._
 def testrand(size: Int, rand:()=>Int) {
    var res = Array.fill(size){0} 
    var timeElapsed = 0L
-   (1 to 1000000).foreach(x => {
+   (1 to 10000000).foreach(x => {
          val st = currentTime
          val r = rand() 
          timeElapsed = timeElapsed + currentTime - st
@@ -73,6 +80,7 @@ for(x<-0 to 100){
   testrand(7, rand7_1 _)
   testrand(7, rand7_2 _)
   testrand(7, rand7_3 _)
+  testrand(7, rand7_4 _)
   testrand(8, rand8 _)
   testrand(16, rand16 _)
 }
